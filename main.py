@@ -1,4 +1,5 @@
 from selenium import webdriver
+import selenium.webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from time import sleep
@@ -18,8 +19,8 @@ subjenis_tempat_tinggal = config['rumahOrtu']
 kota = config['kota']
 
 today = datetime.datetime.today().weekday()
-
-driver = webdriver.Edge(executable_path="./drivers/"+ browser +".exe")
+path = "./drivers/"+ browser +".exe"
+driver = webdriver.Edge(executable_path=path)
 actions = ActionChains(driver)
 driver.get("https://checkin.telkomuniversity.ac.id/home")
 
@@ -29,7 +30,6 @@ def inputMataKuliah(matkul, jamMulai, jamSelesai):
     driver.find_element_by_name("tipePerkuliahan").click()
     driver.find_element_by_name("mataKuliah").send_keys(matkul)
     driver.find_element_by_name("timeStart").click()
-    sleep(1)
     if jamMulai > 12:
         start = jamMulai - 12
         driver.find_element_by_xpath("/html/body/time-picker/div/div/div[1]/div[2]/div[2]").click()
@@ -40,6 +40,7 @@ def inputMataKuliah(matkul, jamMulai, jamSelesai):
     driver.find_element_by_name("timeEnd").click()
     if jamSelesai > 12:
         end = jamSelesai - 12
+        driver.find_element_by_xpath("/html/body/time-picker/div/div/div[1]/div[2]/div[2]").click()
     else:
         end = jamSelesai
     driver.find_element_by_id("timepicker-item-id-" + str(end)).click()
