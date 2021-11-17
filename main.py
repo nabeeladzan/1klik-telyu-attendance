@@ -1,5 +1,6 @@
 from selenium import webdriver
-import selenium.webdriver
+from selenium.webdriver import edge
+from selenium.webdriver.edge import options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from time import sleep
